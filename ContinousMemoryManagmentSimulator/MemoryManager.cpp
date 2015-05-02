@@ -77,6 +77,10 @@ void MemoryManager::free(MemoryUnit * unit)
 		throw "Cannot find specified unit.";
 	}
 
+	if (unit->getFree()) {
+		throw "Memory unit already free.";
+	}
+
 	std::vector<MemoryUnit*>::iterator toDeleteIt = this->units.begin() + elemIndex;
 	int deletedSize = unit->getSize();
 	toDeleteIt = this->units.erase(toDeleteIt);
